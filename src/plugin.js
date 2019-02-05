@@ -3,6 +3,7 @@ import window from 'global/window';
 import {version as VERSION} from '../package.json';
 
 const defaults = {
+  customStyle: false,
   align: 'top-left',
   class: '',
   content: 'This overlay will show up while the video is playing',
@@ -100,8 +101,15 @@ class Overlay extends Component {
         ${options.class}
         ${background}
         vjs-hidden
-      `
-    });
+        `
+      }, {
+        style: options.customStyle ? `
+        top: ${options.customStyle.top}; 
+        left: ${options.customStyle.left};
+        height: ${options.customStyle.height};
+        width: ${options.customStyle.width};
+        ` : ''
+      });
 
     if (typeof content === 'string') {
       el.innerHTML = content;
